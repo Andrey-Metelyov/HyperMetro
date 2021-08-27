@@ -1,8 +1,7 @@
-import Metro.Station;
-
 import java.util.List;
 
-/*public class Stationj {
+/*
+public class Station {
     int number;
     String name;
     List<Station> transfer;

@@ -1,16 +1,18 @@
-import java.util.Collection;
+import Metro.Station;
 
-class MetroLinkedList<T> {
-    Node<T> head;
-    Node<T> tail;
+import java.util.Collection;
+/*
+class MetroLinkedList {
+    Node head;
+    Node tail;
     int size;
 
-    static class Node<T> {
-        T value;
-        Node<T> prev;
-        Node<T> next;
+    static class Node {
+        Station value;
+        Node prev;
+        Node next;
 
-        public Node(T value, Node<T> prev, Node<T> next) {
+        public Node(Station value, Node prev, Node next) {
             this.value = value;
             this.prev = prev;
             this.next = next;
@@ -20,45 +22,73 @@ class MetroLinkedList<T> {
     public MetroLinkedList() {
     }
 
-    public MetroLinkedList(Collection<T> collection) {
-        for (T el : collection) {
+    public MetroLinkedList(Collection<Station> collection) {
+        for (Station el : collection) {
             add(el);
         }
     }
 
-    public MetroLinkedList(T[] array) {
-        for (T el : array) {
+    public MetroLinkedList(Station[] array) {
+        for (Station el : array) {
             add(el);
         }
     }
 
-    public void printTriples(T first, T last) {
-        T prev = first;
-        Node<T> cur = head;
+    public void printLine(Station first, Station last) {
+        System.out.println(first.name);
+        Node cur = head;
         while (cur != null) {
-            T next = cur.next == null ? last : cur.next.value;
-            System.out.print(prev);
+            System.out.println(cur.value.name);
+            cur = cur.next;
+        }
+        System.out.println(last.name);
+    }
+
+    public void printTriples(Station first, Station last) {
+        Station prev = first;
+        Node cur = head;
+        while (cur != null) {
+            Station next = cur.next == null ? last : cur.next.value;
+            System.out.print(prev.name);
             System.out.print(" - ");
-            System.out.print(cur.value);
+            System.out.print(cur.value.name);
             System.out.print(" - ");
-            System.out.println(next);
+            System.out.println(next.name);
             prev = cur.value;
             cur = cur.next;
         }
     }
 
-    public void addFirst(T value) {
+    public void addFirst(Station value) {
         if (head == null) {
             add(value);
         } else {
-            head.prev = new Node<>(value, null, head);
+            head.prev = new Node(value, null, head);
             head = head.prev;
             size++;
         }
     }
 
-    public void addLast(T value) {
+    public void addLast(Station value) {
         add(value);
+    }
+
+    public void remove(Station value) {
+        Node cur = head;
+        while (cur != null && !cur.value.equals(value)) {
+            cur = cur.next;
+        }
+        if (cur != null) {
+            if (cur == head) {
+                removeFirst();
+            } else if (cur == tail) {
+                removeLast();
+            } else {
+                cur.prev.next = cur.next;
+                cur.prev = null;
+                cur.next = null;
+            }
+        }
     }
 
     public void removeFirst() {
@@ -86,9 +116,9 @@ class MetroLinkedList<T> {
     }
 
     public void reverse() {
-        Node<T> cur = head;
+        Node cur = head;
         while (cur != null) {
-            Node<T> next = cur.next;
+            Node next = cur.next;
             cur.next = cur.prev;
             cur.prev = next;
             cur = next;
@@ -99,7 +129,7 @@ class MetroLinkedList<T> {
     }
 
     public void split(int index) {
-        Node<T> cur = head;
+        Node cur = head;
         for (int i = 0; i < index; i++) {
             cur = cur.next;
         }
@@ -111,11 +141,11 @@ class MetroLinkedList<T> {
         tail.next = null;
     }
 
-    public void add(T el) {
+    public void add(Station el) {
         if (tail == null) {
-            head = tail = new Node<>(el, null, null);
+            head = tail = new Node(el, null, null);
         } else {
-            tail.next = new Node<>(el, tail, null);
+            tail.next = new Node(el, tail, null);
             tail = tail.next;
         }
         size++;
@@ -123,7 +153,7 @@ class MetroLinkedList<T> {
 
     @Override
     public String toString() {
-        Node<T> cur = head;
+        Node cur = head;
         StringBuilder buf = new StringBuilder();
         while (cur != null) {
             buf.append(cur.value).append(" ");
@@ -132,3 +162,4 @@ class MetroLinkedList<T> {
         return buf.toString();
     }
 }
+*/

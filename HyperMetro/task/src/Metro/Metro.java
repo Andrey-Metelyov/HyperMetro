@@ -1,11 +1,10 @@
 package Metro;
 
+import Graph.Graph;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Metro {
     List<MetroLine> metroLines = new ArrayList<>();
@@ -21,6 +20,50 @@ public class Metro {
                 .filter(it -> it.getName().equals(station2Name))
                 .findFirst().orElse(null);
         station2.getTransfer().add(new TransferStation(line1Name, station1Name));
+    }
+
+    public List<String> route(String line1, String station1, String line2, String station2) {
+        Graph g = initGraph();
+        System.err.println(g);
+        return List.of();
+    }
+
+    private Graph initGraph() {
+        Map<Integer, Station> mapVertexStation = new HashMap<>();
+        Map<Station, Integer> mapStationVertex = new HashMap<>();
+        int curVertex = 0;
+        for (MetroLine line : metroLines) {
+            for (Station station : line.getStations()) {
+                mapVertexStation.put(curVertex, station);
+                mapStationVertex.put(station, curVertex++);
+            }
+        }
+        Graph g = new Graph(mapStationVertex.size());
+        for (MetroLine line : metroLines) {
+            List<Station> stations = line.getStations();
+            Station prev = null;
+            for (Station station : stations) {
+                if (prev != null) {
+                    int v = mapStationVertex.get(prev);
+                    int w = mapStationVertex.get(station);
+                    g.addEdge(v, w);
+                    g.addEdge(w, v);
+                    System.err.println("add edges: " + v + " <-> " + w);
+                }
+                prev = station;
+                List<TransferStation> transfer = station.getTransfer();
+                for (TransferStation ts : transfer) {
+                    System.err.println(ts);
+                    int v = mapStationVertex.get(station);
+                    MetroLine transferLine = getLine(ts.line);
+                    Station transferStation = transferLine.getStation(ts.getStation());
+                    int w = mapStationVertex.get(transferStation);
+                    g.addEdge(v, w);
+                    System.err.println("add tr edges: " + v + " -> " + w);
+                }
+            }
+        }
+        return g;
     }
 
     static class MetroSerializer implements JsonSerializer<Metro> {
@@ -63,7 +106,7 @@ public class Metro {
                 .registerTypeAdapter(MetroLine.class, new MetroLine.MetroLineDeserializer())
                 .create();
         Metro metro = gson.fromJson(json, Metro.class);
-        System.err.println(metro);
+//        System.err.println(metro);
         return metro;
     }
 

@@ -10,7 +10,7 @@ public class MetroLine {
     String name;
     Map<Integer, Station> stations = new HashMap<>();
 
-    public Collection<Station> getStations() {
+    public List<Station> getStations() {
 //        System.err.println(stations);
 //        List<String> sorted = stations.entrySet()
 //                .stream()
@@ -23,6 +23,14 @@ public class MetroLine {
                 .sorted(Map.Entry.comparingByKey())
                 .map(Map.Entry::getValue)
                 .collect(Collectors.toList());
+    }
+
+    public Station getStation(String name) {
+        return stations.values()
+                .stream()
+                .filter(station -> station.name.equals(name))
+                .findFirst().get();
+
     }
 
     public void addFirst(Station station) {

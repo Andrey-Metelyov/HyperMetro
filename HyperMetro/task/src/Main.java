@@ -12,7 +12,7 @@ public class Main {
         String filename;
         if (args.length == 0) {
             System.out.println("No file specified");
-            filename = "./HyperMetro/task/test/baltimore.json";
+            filename = "./HyperMetro/task/test/prague.json";
 //            return;
         } else {
             filename = args[0];
@@ -24,7 +24,7 @@ public class Main {
             System.err.println(json);
             Metro metro = Metro.deserialize(json);
 //            Map<String, MetroLinkedList> lists = readJson(json);
-//            System.err.println(lists);
+            System.err.println(metro);
             guiLoop(metro);
         } catch (NoSuchFileException e) {
             System.out.println("Error. File " + filename + " doesn't exists");
@@ -78,7 +78,6 @@ public class Main {
                     metro.getLine(line).addFirst(station);
                     break;
                 }
-                ///connect "Linka C" "I.P.Pavlova" "Linka A" "Petriny"
                 case "/connect": {
                     String line1 = command.get(1);
                     String station1 = command.get(2);
@@ -87,6 +86,17 @@ public class Main {
                     metro.connect(line1, station1, line2, station2);
                     break;
                 }
+                //route "Linka A" "Petriny" "Linka A" "Flora"
+                case "/route": {
+                    String line1 = command.get(1);
+                    String station1 = command.get(2);
+                    String line2 = command.get(3);
+                    String station2 = command.get(4);
+                    List<String> route = metro.route(line1, station1, line2, station2);
+                    break;
+                }
+
+
 //                case "/remove": {
 //                    String line = command.get(1);
 //                    Station station = new Station(command.get(2), null);
@@ -99,14 +109,12 @@ public class Main {
                     System.out.println("depot");
                     System.out.println(
                             stations.stream()
-                                    .map(it -> {
-                                        return it.getName()
-                                                + (it.getTransfer().isEmpty() ? "" :
-                                                " - " + it.getTransfer().get(0).getStation()
-                                                + " ("
-                                                        + it.getTransfer().get(0).getLine()
-                                                + ')');
-                                    })
+                                    .map(it -> it.getName()
+                                            + (it.getTransfer().isEmpty() ? "" :
+                                            " - " + it.getTransfer().get(0).getStation()
+                                            + " ("
+                                                    + it.getTransfer().get(0).getLine()
+                                            + ')'))
                                     .collect(Collectors.joining("\n"))
                     );
                     System.out.println("depot");

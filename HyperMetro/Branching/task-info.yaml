@@ -3,12 +3,405 @@ files:
 - name: src/Main.java
   visible: true
   text: |
-    public class Main {
+    import Metro.*;
 
+    import java.io.IOException;
+    import java.nio.file.Files;
+    import java.nio.file.NoSuchFileException;
+    import java.nio.file.Paths;
+    import java.util.*;
+    import java.util.stream.Collectors;
+
+    public class Main {
         public static void main(String[] args) {
-            System.out.println("Hello, world!");
+            String filename;
+            if (args.length == 0) {
+                System.out.println("No file specified");
+                filename = "./HyperMetro/task/test/baltimore.json";
+    //            return;
+            } else {
+                filename = args[0];
+            }
+            System.err.println(Arrays.toString(args));
+            System.err.println(Paths.get("").toAbsolutePath());
+            try {
+                String json = Files.readString(Paths.get(filename));
+                System.err.println(json);
+                Metro metro = Metro.deserialize(json);
+    //            Map<String, MetroLinkedList> lists = readJson(json);
+    //            System.err.println(lists);
+                guiLoop(metro);
+            } catch (NoSuchFileException e) {
+                System.out.println("Error. File " + filename + " doesn't exists");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        private static List<String> parse(String command) {
+            List<String> list = new ArrayList<>();
+            String[] commands = command.split("\\s+", 2);
+            list.add(commands[0]);
+            if (commands.length > 1) {
+                String params = commands[1];
+                while (!params.isEmpty()) {
+                    if (params.charAt(0) == '"') {
+                        int closeQuotePos = params.indexOf('\"', 1);
+                        list.add(params.substring(1, closeQuotePos));
+                        params = params.substring(closeQuotePos + 1).trim();
+                    } else {
+                        int nextSpacePos = params.indexOf(' ');
+                        if (nextSpacePos != -1) {
+                            list.add(params.substring(0, nextSpacePos));
+                            params = params.substring(nextSpacePos + 1).trim();
+                        } else {
+                            list.add(params);
+                            params = "";
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+
+        private static void guiLoop(Metro metro) {
+            Scanner scanner = new Scanner(System.in);
+            while (true) {
+                List<String> command = parse(scanner.nextLine());
+                switch (command.get(0)) {
+                    case "/append": {
+                        String line = command.get(1);
+                        Station station = new Station(command.get(2), null);
+                        System.err.println(line);
+                        System.err.println(station);
+                        metro.getLine(line).add(station);
+                        break;
+                    }
+                    case "/add-head": {
+                        String line = command.get(1);
+                        Station station = new Station(command.get(2), null);
+                        metro.getLine(line).addFirst(station);
+                        break;
+                    }
+                    ///connect "Linka C" "I.P.Pavlova" "Linka A" "Petriny"
+                    case "/connect": {
+                        String line1 = command.get(1);
+                        String station1 = command.get(2);
+                        String line2 = command.get(3);
+                        String station2 = command.get(4);
+                        metro.connect(line1, station1, line2, station2);
+                        break;
+                    }
+    //                case "/remove": {
+    //                    String line = command.get(1);
+    //                    Station station = new Station(command.get(2), null);
+    //                    metro.getLine(line).remove(station);
+    //                    break;
+    //                }
+                    case "/output": {
+                        String line = command.get(1);
+                        Collection<Station> stations = metro.getLine(line).getStations();
+                        System.out.println("depot");
+                        System.out.println(
+                                stations.stream()
+                                        .map(it -> {
+                                            return it.getName()
+                                                    + (it.getTransfer().isEmpty() ? "" :
+                                                    " - " + it.getTransfer().get(0).getStation()
+                                                    + " ("
+                                                            + it.getTransfer().get(0).getLine()
+                                                    + ')');
+                                        })
+                                        .collect(Collectors.joining("\n"))
+                        );
+                        System.out.println("depot");
+                        break;
+                    }
+                    case "/exit":
+                        return;
+                    default:
+                }
+            }
+        }
+
+    //    private static Map<String, MetroLinkedList> readJson(String json) {
+    //        Map<String, MetroLinkedList> result = new HashMap<>();
+    //        try (JsonReader reader = new JsonReader(new StringReader(json))) {
+    //            String name = "";
+    //            int stationNumber = 0;
+    //            String stationName = "";
+    //            List<Station> transfer = null;
+    //            MetroLinkedList current = null;
+    //            State state = State.GLOBAL;
+    //            int counter = 0;
+    //            while (reader.hasNext()) {
+    //                while (reader.hasNext()) {
+    //                    counter++;
+    //                    JsonToken nextToken = reader.peek();
+    //                    System.err.print("\t");
+    //                    System.err.print(counter);
+    //                    System.err.print(" ");
+    //                    System.err.print(state);
+    //                    System.err.print("\t");
+    //                    System.err.println(nextToken);
+    //                    if (JsonToken.BEGIN_OBJECT.equals(nextToken)) {
+    //                        reader.beginObject();
+    //                        if (state == State.GLOBAL) {
+    //                            state = State.LINE;
+    //                        } else if (state == State.LINE) {
+    //                            current = new MetroLinkedList();
+    //                            System.err.println("create new line");
+    //                            System.err.println("add line " + name);
+    //                            result.put(name, current);
+    //                            System.err.println("res:" + result);
+    //                            System.err.println("cur:" + current);
+    //                            state = State.STATION;
+    //                        } else if (state == State.STATION) {
+    //                            state = State.STATION_DETAILS;
+    //                        }
+    //                    } else if (JsonToken.NAME.equals(nextToken)) {
+    //                        name = reader.nextName();
+    //                        if (state == State.STATION) {
+    //                            stationNumber = Integer.parseInt(name);
+    //                            System.err.println("stationNumber=" + stationNumber);
+    //                        }
+    //                        System.err.println("name='" + name + "'");
+    //                    } else if (JsonToken.STRING.equals(nextToken)) {
+    //                        stationName = reader.nextString();
+    //                        state = State.TRANSFER;
+    //                    } else if (JsonToken.BEGIN_ARRAY.equals(nextToken)) {
+    //                        reader.beginArray();
+    //                        transfer = new ArrayList<>();
+    ////                        state = State.TRANSFER;
+    //                    }
+    //                }
+    //                System.err.println("end of object");
+    //                if (state == State.TRANSFER) {
+    //                    current.add(new Station(stationNumber, stationName, transfer));
+    //                    System.err.println("add station " + stationName);
+    //                    System.err.println("res:" + result);
+    //                    System.err.println("cur:" + current);
+    //                    reader.endArray();
+    //                    state = State.STATION;
+    //                } else {
+    //                    state = State.LINE;
+    //                }
+    //                reader.endObject();
+    //            }
+    //        } catch (IOException e) {
+    //            e.printStackTrace();
+    //        }
+    //        return result;
+    //    }
+    }
+  learner_created: false
+- name: src/MetroLinkedList.java
+  visible: true
+  text: |-
+    import Metro.Station;
+
+    import java.util.Collection;
+    /*
+    class MetroLinkedList {
+        Node head;
+        Node tail;
+        int size;
+
+        static class Node {
+            Station value;
+            Node prev;
+            Node next;
+
+            public Node(Station value, Node prev, Node next) {
+                this.value = value;
+                this.prev = prev;
+                this.next = next;
+            }
+        }
+
+        public MetroLinkedList() {
+        }
+
+        public MetroLinkedList(Collection<Station> collection) {
+            for (Station el : collection) {
+                add(el);
+            }
+        }
+
+        public MetroLinkedList(Station[] array) {
+            for (Station el : array) {
+                add(el);
+            }
+        }
+
+        public void printLine(Station first, Station last) {
+            System.out.println(first.name);
+            Node cur = head;
+            while (cur != null) {
+                System.out.println(cur.value.name);
+                cur = cur.next;
+            }
+            System.out.println(last.name);
+        }
+
+        public void printTriples(Station first, Station last) {
+            Station prev = first;
+            Node cur = head;
+            while (cur != null) {
+                Station next = cur.next == null ? last : cur.next.value;
+                System.out.print(prev.name);
+                System.out.print(" - ");
+                System.out.print(cur.value.name);
+                System.out.print(" - ");
+                System.out.println(next.name);
+                prev = cur.value;
+                cur = cur.next;
+            }
+        }
+
+        public void addFirst(Station value) {
+            if (head == null) {
+                add(value);
+            } else {
+                head.prev = new Node(value, null, head);
+                head = head.prev;
+                size++;
+            }
+        }
+
+        public void addLast(Station value) {
+            add(value);
+        }
+
+        public void remove(Station value) {
+            Node cur = head;
+            while (cur != null && !cur.value.equals(value)) {
+                cur = cur.next;
+            }
+            if (cur != null) {
+                if (cur == head) {
+                    removeFirst();
+                } else if (cur == tail) {
+                    removeLast();
+                } else {
+                    cur.prev.next = cur.next;
+                    cur.prev = null;
+                    cur.next = null;
+                }
+            }
+        }
+
+        public void removeFirst() {
+            if (head != null) {
+                head = head.next;
+                if (head != null) {
+                    head.prev = null;
+                } else {
+                    tail = null;
+                }
+            }
+            size--;
+        }
+
+        public void removeLast() {
+            if (tail != null) {
+                tail = tail.prev;
+                if (tail != null) {
+                    tail.next = null;
+                } else {
+                    head = null;
+                }
+            }
+            size--;
+        }
+
+        public void reverse() {
+            Node cur = head;
+            while (cur != null) {
+                Node next = cur.next;
+                cur.next = cur.prev;
+                cur.prev = next;
+                cur = next;
+            }
+            cur = tail;
+            tail = head;
+            head = cur;
+        }
+
+        public void split(int index) {
+            Node cur = head;
+            for (int i = 0; i < index; i++) {
+                cur = cur.next;
+            }
+            tail.next = head;
+            head.prev = tail;
+            head = cur;
+            tail = cur.prev;
+            head.prev = null;
+            tail.next = null;
+        }
+
+        public void add(Station el) {
+            if (tail == null) {
+                head = tail = new Node(el, null, null);
+            } else {
+                tail.next = new Node(el, tail, null);
+                tail = tail.next;
+            }
+            size++;
+        }
+
+        @Override
+        public String toString() {
+            Node cur = head;
+            StringBuilder buf = new StringBuilder();
+            while (cur != null) {
+                buf.append(cur.value).append(" ");
+                cur = cur.next;
+            }
+            return buf.toString();
         }
     }
+    */
+  learner_created: false
+- name: src/Station.java
+  visible: true
+  text: |-
+    import java.util.List;
+
+    /*
+    public class Station {
+        int number;
+        String name;
+        List<Station> transfer;
+        static Station depot = new Station(0, "depot", null);
+
+        static Station depot() {
+            return depot;
+        }
+
+        public Station(int number, String name, List<Station> transfer) {
+            this.number = number;
+            this.name = name;
+            this.transfer = transfer;
+        }
+
+        public Station(String name, List<Station> transfer) {
+            this.number = -1;
+            this.name = name;
+            this.transfer = transfer;
+        }
+
+        @Override
+        public String toString() {
+            return "Station{" +
+                    "number=" + number +
+                    ", name='" + name + '\'' +
+                    ", transfer=" + transfer +
+                    '}';
+        }
+    }
+    */
   learner_created: false
 - name: test/london.json
   visible: false
@@ -7178,5 +7571,5 @@ files:
     }
   learner_created: false
 feedback_link: https://hyperskill.org/projects/120/stages/653/implement#comment
-status: Unchecked
-record: -1
+status: Failed
+record: 3
