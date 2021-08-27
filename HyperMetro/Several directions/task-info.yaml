@@ -426,22 +426,5 @@ files:
     }
   learner_created: false
 feedback_link: https://hyperskill.org/projects/120/stages/649/implement#comment
-status: Failed
-feedback:
-  message: "Exception in test #1\n\ncom.google.gson.JsonSyntaxException: java.lang.IllegalStateException:\
-    \ Expected BEGIN_ARRAY but was BEGIN_OBJECT at line 1 column 2 path $\r\n\tat\
-    \ com.google.gson.Gson.fromJson(Gson.java:939)\r\n\tat com.google.gson.Gson.fromJson(Gson.java:892)\r\
-    \n\tat com.google.gson.Gson.fromJson(Gson.java:841)\r\n\tat Main.main(Main.java:21)\n\
-    \nPlease find below the output of your program during this failed test.\n\n---\n\
-    \nArguments: ./test/baltimore.json\n\nstderr:\n[./test/baltimore.json]\n{\n  &quot;SubwayLink&quot;:\
-    \ {\n    &quot;1&quot;: &quot;Owings Mills&quot;,\n    &quot;2&quot;: &quot;Old\
-    \ Court&quot;,\n    &quot;3&quot;: &quot;Milford Mill&quot;,\n    &quot;4&quot;:\
-    \ &quot;Reiserstown Plaza&quot;,\n    &quot;5&quot;: &quot;Rogers Avenue&quot;,\n\
-    \    &quot;6&quot;: &quot;West Cold Spring&quot;,\n    &quot;7&quot;: &quot;Mondawmin&quot;,\n\
-    \    &quot;8&quot;: &quot;Penn North&quot;,\n    &quot;9&quot;: &quot;Uptown&quot;,\n\
-    \    &quot;10&quot;: &quot;State Center&quot;,\n    &quot;11&quot;: &quot;Lexington\
-    \ Market&quot;,\n    &quot;12&quot;: &quot;Charles Center&quot;,\n    &quot;13&quot;:\
-    \ &quot;Shot Tower/Market Place&quot;,\n    &quot;14&quot;: &quot;Johns Hopkins\
-    \ Hospital&quot;\n  }\n}"
-  time: Wed, 25 Aug 2021 07:19:46 UTC
-record: -1
+status: Solved
+record: 3

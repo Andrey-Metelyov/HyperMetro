@@ -3,14 +3,14 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/388955/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: Thu, 01 Jan 1970 00:00:00 UTC
+update_date: Fri, 27 Aug 2021 02:02:49 UTC
 stages:
 - id: 648
   step: 10341
   is_completed: true
 - id: 649
   step: 10342
-  is_completed: false
+  is_completed: true
 - id: 650
   step: 10343
   is_completed: false
@@ -121,8 +121,6 @@ topics:
     theory_id: 7046
   - title: IntelliJ IDEA
     theory_id: 3801
-  - title: Algorithms in Java
-    theory_id: 3540
   - title: Command line overview
     theory_id: 8977
   - title: Parameters and options
@@ -157,14 +155,16 @@ topics:
     theory_id: 9723
   - title: Try with resources
     theory_id: 9734
-  - title: Doubly linked list in Java
-    theory_id: 8290
   - title: IntelliJ Run Configurations
     theory_id: 10630
+  - title: Algorithms in Java
+    theory_id: 3540
   - title: Introduction to generic programming
     theory_id: 3492
   - title: Generics and Object
     theory_id: 3493
+  - title: Doubly linked list in Java
+    theory_id: 8290
   - title: Defining classes
     theory_id: 3618
   - title: Constructor
