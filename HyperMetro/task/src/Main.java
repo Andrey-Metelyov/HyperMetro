@@ -78,6 +78,15 @@ public class Main {
                     metro.getLine(line).addFirst(station);
                     break;
                 }
+                ///connect "Linka C" "I.P.Pavlova" "Linka A" "Petriny"
+                case "/connect": {
+                    String line1 = command.get(1);
+                    String station1 = command.get(2);
+                    String line2 = command.get(3);
+                    String station2 = command.get(4);
+                    metro.connect(line1, station1, line2, station2);
+                    break;
+                }
 //                case "/remove": {
 //                    String line = command.get(1);
 //                    Station station = new Station(command.get(2), null);
@@ -90,7 +99,14 @@ public class Main {
                     System.out.println("depot");
                     System.out.println(
                             stations.stream()
-                                    .map(Station::getName)
+                                    .map(it -> {
+                                        return it.getName()
+                                                + (it.getTransfer().isEmpty() ? "" :
+                                                " - " + it.getTransfer().get(0).getStation()
+                                                + " ("
+                                                        + it.getTransfer().get(0).getLine()
+                                                + ')');
+                                    })
                                     .collect(Collectors.joining("\n"))
                     );
                     System.out.println("depot");

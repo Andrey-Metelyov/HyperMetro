@@ -13,11 +13,15 @@ public class Station {
 
     public Station(String name, List<TransferStation> transfer) {
         this.name = name;
-        this.transfer = transfer;
+        this.transfer = transfer == null ? List.of() : transfer;
     }
 
     public String getName() {
         return name;
+    }
+
+    public List<TransferStation> getTransfer() {
+        return transfer;
     }
 
     @Override

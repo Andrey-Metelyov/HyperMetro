@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class MetroLine {
     String name;
-    Map<String, Station> stations = new HashMap<>();
+    Map<Integer, Station> stations = new HashMap<>();
 
     public Collection<Station> getStations() {
 //        System.err.println(stations);
@@ -19,21 +19,22 @@ public class MetroLine {
 //                .collect(Collectors.toList());
 //        System.err.println(sorted);
         return stations.entrySet().stream()
-                .sorted(Map.Entry.comparingByKey(new AlphanumComparator()))
+//                .sorted(Map.Entry.comparingByKey(new AlphanumComparator()))
+                .sorted(Map.Entry.comparingByKey())
                 .map(Map.Entry::getValue)
                 .collect(Collectors.toList());
     }
 
     public void addFirst(Station station) {
-        stations.put("0", station);
+        stations.put(0, station);
     }
 
     static class MetroLineSerializer implements JsonSerializer<MetroLine> {
         @Override
         public JsonElement serialize(MetroLine src, Type typeOfSrc, JsonSerializationContext context) {
             JsonObject result = new JsonObject();
-            for(Map.Entry<String, Station> entry : src.stations.entrySet()) {
-                result.add(entry.getKey(), context.serialize(entry.getValue()));
+            for(Map.Entry<Integer, Station> entry : src.stations.entrySet()) {
+                result.add(entry.getKey().toString(), context.serialize(entry.getValue()));
             }
             return result;
         }
@@ -46,19 +47,21 @@ public class MetroLine {
             JsonObject jsonObject = json.getAsJsonObject();
             for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
                 Station station = context.deserialize(entry.getValue(), Station.class);
-                metroLine.stations.put(entry.getKey(), station);
+                metroLine.stations.put(Integer.parseInt(entry.getKey()), station);
             }
             return metroLine;
         }
     }
 
     public void add(Station station) {
-        stations.put(String.valueOf(stations.size() + 1), station);
+        stations.put(stations.size() + 1, station);
+        System.err.println(stations);
     }
 
     public void add(String name) {
         Station station = new Station(name);
-        stations.put(String.valueOf(stations.size() + 1), station);
+        stations.put(stations.size() + 1, station);
+        System.err.println(stations);
     }
 
     @Override

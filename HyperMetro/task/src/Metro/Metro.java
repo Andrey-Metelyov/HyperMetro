@@ -10,6 +10,19 @@ import java.util.Map;
 public class Metro {
     List<MetroLine> metroLines = new ArrayList<>();
 
+    public void connect(String line1Name, String station1Name, String line2Name, String station2Name) {
+        MetroLine metroLine1 = getLine(line1Name);
+        MetroLine metroLine2 = getLine(line2Name);
+        Station station1 = metroLine1.getStations().stream()
+                .filter(it -> it.getName().equals(station1Name))
+                .findFirst().orElse(null);
+        station1.getTransfer().add(new TransferStation(line2Name, station2Name));
+        Station station2 = metroLine2.getStations().stream()
+                .filter(it -> it.getName().equals(station2Name))
+                .findFirst().orElse(null);
+        station2.getTransfer().add(new TransferStation(line1Name, station1Name));
+    }
+
     static class MetroSerializer implements JsonSerializer<Metro> {
         @Override
         public JsonElement serialize(Metro src, Type typeOfSrc, JsonSerializationContext context) {
