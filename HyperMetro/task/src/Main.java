@@ -13,7 +13,7 @@ public class Main {
         if (args.length == 0) {
             System.out.println("No file specified");
             filename = "./HyperMetro/task/test/prague.json";
-//            return;
+            return;
         } else {
             filename = args[0];
         }
@@ -92,7 +92,20 @@ public class Main {
                     String station1 = command.get(2);
                     String line2 = command.get(3);
                     String station2 = command.get(4);
-                    List<String> route = metro.route(line1, station1, line2, station2);
+                    List<Station> route = new Route(metro).route(line1, station1, line2, station2);
+                    Station prev = null;
+                    for (Station s : route) {
+//                        System.err.println(prev);
+//                        System.err.println(s);
+                        MetroLine line = metro.getStationLine(s);
+                        TransferStation ts = new TransferStation(line.getName(), s.getName());
+//                        System.err.println(ts);
+                        if (prev != null && prev.getTransfer().contains(ts)) {
+                            System.out.println("Transition to line " + line.getName());
+                        }
+                        System.out.println(s.getName());
+                        prev = s;
+                    }
                     break;
                 }
 

@@ -1,5 +1,7 @@
 package Metro;
 
+import java.util.Objects;
+
 public class TransferStation {
     String line;
     String station;
@@ -23,5 +25,18 @@ public class TransferStation {
                 "line='" + line + '\'' +
                 ", station='" + station + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TransferStation that = (TransferStation) o;
+        return line.equals(that.line) && station.equals(that.station);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(line, station);
     }
 }

@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class MetroLine {
     String name;
-    Map<Integer, Station> stations = new HashMap<>();
+    private final Map<Integer, Station> stations = new HashMap<>();
 
     public List<Station> getStations() {
 //        System.err.println(stations);
@@ -35,6 +35,14 @@ public class MetroLine {
 
     public void addFirst(Station station) {
         stations.put(0, station);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String key) {
+        this.name = name;
     }
 
     static class MetroLineSerializer implements JsonSerializer<MetroLine> {
