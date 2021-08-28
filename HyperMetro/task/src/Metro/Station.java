@@ -9,6 +9,10 @@ public class Station {
     List<TransferStation> transfer;
     Integer time;
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return "Station{" +

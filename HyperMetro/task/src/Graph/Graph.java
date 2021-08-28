@@ -35,9 +35,9 @@ public class Graph {
         return adj.get(v).size();
     }
 
-    public void addEdge(int v, int w, int weigth) {
+    public void addEdge(int v, int w, int weight) {
         E++;
-        adj.get(v).add(new WeightedEdge(v, w, weigth));
+        adj.get(v).add(new WeightedEdge(v, w, weight));
     }
 
     @Override

@@ -8,6 +8,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        boolean debug = false;
         String filename;
         if (args.length == 0) {
             System.out.println("No file specified");
@@ -19,8 +20,9 @@ public class Main {
         System.err.println(Paths.get("").toAbsolutePath());
         try {
             String json = Files.readString(Paths.get(filename));
-            System.err.println(json);
+            if (debug) System.err.println(json);
             Metro metro = Metro.deserialize(json);
+            if (debug) System.err.println(metro);
             guiLoop(metro);
         } catch (NoSuchFileException e) {
             System.out.println("Error. File " + filename + " doesn't exists");
@@ -61,14 +63,20 @@ public class Main {
             List<String> command = parse(scanner.nextLine());
             System.err.println("command: " + command);
             switch (command.get(0)) {
+                case "/fastest-route":
                 case "/route": {
                     String line1 = command.get(1);
                     String station1 = command.get(2);
                     String line2 = command.get(3);
                     String station2 = command.get(4);
-                    Route r = new Route(metro);
-                    List<Station> route = r.route(line1, station1, line2, station2);
-                    System.out.println(route);
+                    Route r = new Route(metro, command.get(0).equals("/fastest-route"));
+                    List<String> route = r.printable(r.route(line1, station1, line2, station2));
+                    for (String line : route) {
+                        System.out.println(line);
+                    }
+                    if (command.get(0).equals("/fastest-route")) {
+                        System.out.println("Total time: " + r.getLastDistance());
+                    }
                 }
                 break;
 //                case "/append": {

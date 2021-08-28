@@ -62,26 +62,26 @@ public class Metro {
                 .registerTypeAdapter(Metro.class, new MetroDeserializer())
                 .registerTypeAdapter(MetroLine.class, new MetroLine.MetroLineDeserializer())
                 .create();
-        //        System.err.println(metro);
+//                System.err.println(metro);
         return gson.fromJson(json, Metro.class);
     }
 
     public MetroLine getLine(String line) {
-        System.err.println("getLine(" + line + ")");
+//        System.err.println("getLine(" + line + ")");
         return metroLines.stream()
                 .filter(it -> it.name.equals(line))
                 .findFirst()
                 .orElse(null);
     }
 //
-//    public MetroLine getStationLine(Station station) {
-//        for (MetroLine metroLine : metroLines) {
-//            if (metroLine.getStations().contains(station)) {
-//                return metroLine;
-//            }
-//        }
-//        return null;
-//    }
+    public MetroLine getStationLine(Station station) {
+        for (MetroLine metroLine : metroLines) {
+            if (metroLine.stations.contains(station)) {
+                return metroLine;
+            }
+        }
+        return null;
+    }
 
     @Override
     public String toString() {
