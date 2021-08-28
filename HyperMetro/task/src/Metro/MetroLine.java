@@ -3,12 +3,12 @@ package Metro;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MetroLine {
     String name;
-    private List<Station> stations = new ArrayList<>();
+    final List<Station> stations = new ArrayList<>();
 
 //    public List<Station> getStations() {
 //        return stations.entrySet().stream()
@@ -17,13 +17,12 @@ public class MetroLine {
 //                .collect(Collectors.toList());
 //    }
 //
-//    public Station getStation(String name) {
-//        return stations.values()
-//                .stream()
-//                .filter(station -> station.name.equals(name))
-//                .findFirst().get();
-//
-//    }
+    public Station getStation(String name) {
+        return stations
+                .stream()
+                .filter(station -> station.name.equals(name))
+                .findFirst().orElse(null);
+    }
 //
 //    public void addFirst(Station station) {
 //        stations.put(0, station);

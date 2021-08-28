@@ -2,11 +2,10 @@ package Metro;
 
 import com.google.gson.*;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class Metro {
     List<MetroLine> metroLines = new ArrayList<>();
@@ -63,18 +62,17 @@ public class Metro {
                 .registerTypeAdapter(Metro.class, new MetroDeserializer())
                 .registerTypeAdapter(MetroLine.class, new MetroLine.MetroLineDeserializer())
                 .create();
-        Metro metro = gson.fromJson(json, Metro.class);
-//        System.err.println(metro);
-        return metro;
+        //        System.err.println(metro);
+        return gson.fromJson(json, Metro.class);
     }
 
-//    public MetroLine getLine(String line) {
-//        System.err.println("getLine(" + line + ")");
-//        return metroLines.stream()
-//                .filter(it -> it.getName().equals(line))
-//                .findFirst()
-//                .orElse(null);
-//    }
+    public MetroLine getLine(String line) {
+        System.err.println("getLine(" + line + ")");
+        return metroLines.stream()
+                .filter(it -> it.name.equals(line))
+                .findFirst()
+                .orElse(null);
+    }
 //
 //    public MetroLine getStationLine(Station station) {
 //        for (MetroLine metroLine : metroLines) {
