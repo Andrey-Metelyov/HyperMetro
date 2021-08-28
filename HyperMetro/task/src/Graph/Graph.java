@@ -8,7 +8,7 @@ public class Graph {
     private static final String NEWLINE = System.getProperty("line.separator");
     private final int V;
     private int E;
-    private List<Collection<Integer>> adj;
+    private final List<Collection<WightedEdge>> adj;
 
     public Graph(int V) {
         this.V = V;
@@ -27,7 +27,7 @@ public class Graph {
         return E;
     }
 
-    public Collection<Integer> adj(int v) {
+    public Collection<WightedEdge> adj(int v) {
         return adj.get(v);
     }
 
@@ -35,10 +35,9 @@ public class Graph {
         return adj.get(v).size();
     }
 
-    public void addEdge(int v, int w) {
+    public void addEdge(int v, int w, int weigth) {
         E++;
-        adj.get(v).add(w);
-//        adj.get(w).add(v);
+        adj.get(v).add(new WightedEdge(v, w, weigth));
     }
 
     @Override
@@ -48,7 +47,7 @@ public class Graph {
                 .append(E).append(" edges ").append(NEWLINE);
         for (int v = 0; v < V; v++) {
             s.append(v).append(": ");
-            for (int w : adj.get(v)) {
+            for (WightedEdge w : adj.get(v)) {
                 s.append(w).append(" ");
             }
             s.append(NEWLINE);

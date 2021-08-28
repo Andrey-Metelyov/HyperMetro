@@ -1126,110 +1126,90 @@ files:
   learner_created: true
 - name: test/baltimore.json
   visible: true
+  text: |-
+    {
+      "SubwayLink": {
+        "1": {
+          "name": "Owings Mills",
+          "transfer": [],
+          "time": 2
+        },
+        "2": {
+          "name": "Old Court",
+          "transfer": [],
+          "time": 4
+        },
+        "3": {
+          "name": "Milford Mill",
+          "transfer": [],
+          "time": 6
+        },
+        "4": {
+          "name": "Reiserstown Plaza",
+          "transfer": [],
+          "time": 3
+        },
+        "5": {
+          "name": "Rogers Avenue",
+          "transfer": [],
+          "time": 2
+        },
+        "6": {
+          "name": "West Cold Spring",
+          "transfer": [],
+          "time": 6
+        },
+        "7": {
+          "name": "Mondawmin",
+          "transfer": [],
+          "time": 4
+        },
+        "8": {
+          "name": "Penn North",
+          "transfer": [],
+          "time": 5
+        },
+        "9": {
+          "name": "Uptown",
+          "transfer": [],
+          "time": 7
+        },
+        "10": {
+          "name": "State Center",
+          "transfer": [],
+          "time": 3
+        },
+        "11": {
+          "name": "Lexington Market",
+          "transfer": [],
+          "time": 5
+        },
+        "12": {
+          "name": "Charles Center",
+          "transfer": [],
+          "time": 6
+        },
+        "13": {
+          "name": "Shot Tower/Market Place",
+          "transfer": [],
+          "time": 4
+        },
+        "14": {
+          "name": "Johns Hopkins Hospital",
+          "transfer": [], "time": null
+        }
+      }
+    }
+  learner_created: true
+- name: src/Graph/WightedEdge.java
+  visible: true
+  learner_created: true
+- name: src/Graph/Distance.java
+  visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/projects/120/stages/651/implement#comment
-status: Failed
+status: Solved
 feedback:
-  message: "Wrong answer in test #8\n\nYour program printed an incorrect number of\
-    \ stations in the route.\nExpected: 5 stations and 2 transitions. Output should\
-    \ be 9 lines.\nYour output: 8 lines\n\nPlease find below the output of your program\
-    \ during this failed test.\nNote that the &#39;&gt;&#39; character indicates the\
-    \ beginning of the input line.\n\n---\n\nArguments: ./test/prague.json\n\nstdout:\n\
-    &gt; /route &quot;Linka C&quot; &quot;Vysehrad&quot; &quot;Linka B&quot; &quot;Namesti\
-    \ Republiky&quot;\nVysehrad\nI.P.Pavlova\nMuzeum\nHlavni nadrazi\nFlorenc\nTransition\
-    \ to line Linka B\nFlorenc\nNamesti Republiky\n\nstderr:\n[last 250 lines of output\
-    \ are shown, 244 skipped]\n      &quot;transfer&quot;: []\n    } ,\n    &quot;12&quot;:\
-    \ {\n      &quot;name&quot;: &quot;Vysehrad&quot; ,\n      &quot;transfer&quot;:\
-    \ []\n    } ,\n    &quot;13&quot;: {\n      &quot;name&quot;: &quot;Prazskeho\
-    \ povstani&quot; ,\n      &quot;transfer&quot;: []\n    } ,\n    &quot;14&quot;:\
-    \ {\n      &quot;name&quot;: &quot;Pankrac&quot; ,\n      &quot;transfer&quot;:\
-    \ []\n    } ,\n    &quot;15&quot;: {\n      &quot;name&quot;: &quot;Budejovicka&quot;\
-    \ ,\n      &quot;transfer&quot;: []\n    } ,\n    &quot;16&quot;: {\n      &quot;name&quot;:\
-    \ &quot;Kacerov&quot; ,\n      &quot;transfer&quot;: []\n    } ,\n    &quot;17&quot;:\
-    \ {\n      &quot;name&quot;: &quot;Roztyly&quot; ,\n      &quot;transfer&quot;:\
-    \ []\n    } ,\n    &quot;18&quot;: {\n      &quot;name&quot;: &quot;Chodov&quot;\
-    \ ,\n      &quot;transfer&quot;: []\n    } ,\n    &quot;19&quot;: {\n      &quot;name&quot;:\
-    \ &quot;Opatov&quot; ,\n      &quot;transfer&quot;: []\n    } ,\n    &quot;20&quot;:\
-    \ {\n      &quot;name&quot;: &quot;Haje&quot; ,\n      &quot;transfer&quot;: []\n\
-    \    }\n  }\n}\nMetro{metroLines=[MetroLine{name=&#39;Linka A&#39;, stations={1=Station{name=&#39;Nemocnice\
-    \ Motol&#39;, transfer=[]}\n, 2=Station{name=&#39;Petriny&#39;, transfer=[]}\n\
-    , 3=Station{name=&#39;Nadrazi Veleslavin&#39;, transfer=[]}\n, 4=Station{name=&#39;Borislavka&#39;,\
-    \ transfer=[]}\n, 5=Station{name=&#39;Dejvicka&#39;, transfer=[]}\n, 6=Station{name=&#39;Hradcanska&#39;,\
-    \ transfer=[]}\n, 7=Station{name=&#39;Malostranska&#39;, transfer=[]}\n, 8=Station{name=&#39;Staromestska&#39;,\
-    \ transfer=[]}\n, 9=Station{name=&#39;Mustek&#39;, transfer=[TransferStation{line=&#39;Linka\
-    \ B&#39;, station=&#39;Mustek&#39;}]}\n, 10=Station{name=&#39;Muzeum&#39;, transfer=[TransferStation{line=&#39;Linka\
-    \ C&#39;, station=&#39;Muzeum&#39;}]}\n, 11=Station{name=&#39;Namesti Miru&#39;,\
-    \ transfer=[]}\n, 12=Station{name=&#39;Jiriho z Podebrad&#39;, transfer=[]}\n\
-    , 13=Station{name=&#39;Flora&#39;, transfer=[]}\n, 14=Station{name=&#39;Zelivskeho&#39;,\
-    \ transfer=[]}\n, 15=Station{name=&#39;Strasnicka&#39;, transfer=[]}\n, 16=Station{name=&#39;Skalka&#39;,\
-    \ transfer=[]}\n, 17=Station{name=&#39;Depo Hostivar&#39;, transfer=[]}\n}}\n\
-    , MetroLine{name=&#39;Linka B&#39;, stations={1=Station{name=&#39;Cerny Most&#39;,\
-    \ transfer=[]}\n, 2=Station{name=&#39;Rajska zahrada&#39;, transfer=[]}\n, 3=Station{name=&#39;Hloubetin&#39;,\
-    \ transfer=[]}\n, 4=Station{name=&#39;Kolbenova&#39;, transfer=[]}\n, 5=Station{name=&#39;Vysocanska&#39;,\
-    \ transfer=[]}\n, 6=Station{name=&#39;Ceskomoravska&#39;, transfer=[]}\n, 7=Station{name=&#39;Palmovka&#39;,\
-    \ transfer=[]}\n, 8=Station{name=&#39;Invalidovna&#39;, transfer=[]}\n, 9=Station{name=&#39;Krizikova&#39;,\
-    \ transfer=[]}\n, 10=Station{name=&#39;Florenc&#39;, transfer=[TransferStation{line=&#39;Linka\
-    \ C&#39;, station=&#39;Florenc&#39;}]}\n, 11=Station{name=&#39;Namesti Republiky&#39;,\
-    \ transfer=[]}\n, 12=Station{name=&#39;Mustek&#39;, transfer=[TransferStation{line=&#39;Linka\
-    \ A&#39;, station=&#39;Mustek&#39;}]}\n, 13=Station{name=&#39;Narodni trida&#39;,\
-    \ transfer=[]}\n, 14=Station{name=&#39;Karlovo namesti&#39;, transfer=[]}\n, 15=Station{name=&#39;Andel&#39;,\
-    \ transfer=[]}\n, 16=Station{name=&#39;Smichovske nadrazi&#39;, transfer=[]}\n\
-    , 17=Station{name=&#39;Radlicka&#39;, transfer=[]}\n, 18=Station{name=&#39;Jinonice&#39;,\
-    \ transfer=[]}\n, 19=Station{name=&#39;Nove Butovice&#39;, transfer=[]}\n, 20=Station{name=&#39;Hurka&#39;,\
-    \ transfer=[]}\n, 21=Station{name=&#39;Luziny&#39;, transfer=[]}\n, 22=Station{name=&#39;Luka&#39;,\
-    \ transfer=[]}\n, 23=Station{name=&#39;Stodulky&#39;, transfer=[]}\n, 24=Station{name=&#39;Zlicin&#39;,\
-    \ transfer=[]}\n}}\n, MetroLine{name=&#39;Linka C&#39;, stations={1=Station{name=&#39;Letnany&#39;,\
-    \ transfer=[]}\n, 2=Station{name=&#39;Prosek&#39;, transfer=[]}\n, 3=Station{name=&#39;Strizkov&#39;,\
-    \ transfer=[]}\n, 4=Station{name=&#39;Ladvi&#39;, transfer=[]}\n, 5=Station{name=&#39;Kobylisy&#39;,\
-    \ transfer=[]}\n, 6=Station{name=&#39;Nadrazi Holesovice&#39;, transfer=[]}\n\
-    , 7=Station{name=&#39;Vltavska&#39;, transfer=[]}\n, 8=Station{name=&#39;Florenc&#39;,\
-    \ transfer=[TransferStation{line=&#39;Linka B&#39;, station=&#39;Florenc&#39;}]}\n\
-    , 9=Station{name=&#39;Hlavni nadrazi&#39;, transfer=[]}\n, 10=Station{name=&#39;Muzeum&#39;,\
-    \ transfer=[TransferStation{line=&#39;Linka A&#39;, station=&#39;Muzeum&#39;}]}\n\
-    , 11=Station{name=&#39;I.P.Pavlova&#39;, transfer=[]}\n, 12=Station{name=&#39;Vysehrad&#39;,\
-    \ transfer=[]}\n, 13=Station{name=&#39;Prazskeho povstani&#39;, transfer=[]}\n\
-    , 14=Station{name=&#39;Pankrac&#39;, transfer=[]}\n, 15=Station{name=&#39;Budejovicka&#39;,\
-    \ transfer=[]}\n, 16=Station{name=&#39;Kacerov&#39;, transfer=[]}\n, 17=Station{name=&#39;Roztyly&#39;,\
-    \ transfer=[]}\n, 18=Station{name=&#39;Chodov&#39;, transfer=[]}\n, 19=Station{name=&#39;Opatov&#39;,\
-    \ transfer=[]}\n, 20=Station{name=&#39;Haje&#39;, transfer=[]}\n}}\n]}\nadd edges:\
-    \ 0 &lt;-&gt; 1\nadd edges: 1 &lt;-&gt; 2\nadd edges: 2 &lt;-&gt; 3\nadd edges:\
-    \ 3 &lt;-&gt; 4\nadd edges: 4 &lt;-&gt; 5\nadd edges: 5 &lt;-&gt; 6\nadd edges:\
-    \ 6 &lt;-&gt; 7\nadd edges: 7 &lt;-&gt; 8\nTransferStation{line=&#39;Linka B&#39;,\
-    \ station=&#39;Mustek&#39;}\ngetLine(Linka B)\nadd tr edges: 8 -&gt; 28\nadd edges:\
-    \ 8 &lt;-&gt; 9\nTransferStation{line=&#39;Linka C&#39;, station=&#39;Muzeum&#39;}\n\
-    getLine(Linka C)\nadd tr edges: 9 -&gt; 50\nadd edges: 9 &lt;-&gt; 10\nadd edges:\
-    \ 10 &lt;-&gt; 11\nadd edges: 11 &lt;-&gt; 12\nadd edges: 12 &lt;-&gt; 13\nadd\
-    \ edges: 13 &lt;-&gt; 14\nadd edges: 14 &lt;-&gt; 15\nadd edges: 15 &lt;-&gt;\
-    \ 16\nadd edges: 17 &lt;-&gt; 18\nadd edges: 18 &lt;-&gt; 19\nadd edges: 19 &lt;-&gt;\
-    \ 20\nadd edges: 20 &lt;-&gt; 21\nadd edges: 21 &lt;-&gt; 22\nadd edges: 22 &lt;-&gt;\
-    \ 23\nadd edges: 23 &lt;-&gt; 24\nadd edges: 24 &lt;-&gt; 25\nadd edges: 25 &lt;-&gt;\
-    \ 26\nTransferStation{line=&#39;Linka C&#39;, station=&#39;Florenc&#39;}\ngetLine(Linka\
-    \ C)\nadd tr edges: 26 -&gt; 48\nadd edges: 26 &lt;-&gt; 27\nadd edges: 27 &lt;-&gt;\
-    \ 28\nTransferStation{line=&#39;Linka A&#39;, station=&#39;Mustek&#39;}\ngetLine(Linka\
-    \ A)\nadd tr edges: 28 -&gt; 8\nadd edges: 28 &lt;-&gt; 29\nadd edges: 29 &lt;-&gt;\
-    \ 30\nadd edges: 30 &lt;-&gt; 31\nadd edges: 31 &lt;-&gt; 32\nadd edges: 32 &lt;-&gt;\
-    \ 33\nadd edges: 33 &lt;-&gt; 34\nadd edges: 34 &lt;-&gt; 35\nadd edges: 35 &lt;-&gt;\
-    \ 36\nadd edges: 36 &lt;-&gt; 37\nadd edges: 37 &lt;-&gt; 38\nadd edges: 38 &lt;-&gt;\
-    \ 39\nadd edges: 39 &lt;-&gt; 40\nadd edges: 41 &lt;-&gt; 42\nadd edges: 42 &lt;-&gt;\
-    \ 43\nadd edges: 43 &lt;-&gt; 44\nadd edges: 44 &lt;-&gt; 45\nadd edges: 45 &lt;-&gt;\
-    \ 46\nadd edges: 46 &lt;-&gt; 47\nadd edges: 47 &lt;-&gt; 48\nTransferStation{line=&#39;Linka\
-    \ B&#39;, station=&#39;Florenc&#39;}\ngetLine(Linka B)\nadd tr edges: 48 -&gt;\
-    \ 26\nadd edges: 48 &lt;-&gt; 49\nadd edges: 49 &lt;-&gt; 50\nTransferStation{line=&#39;Linka\
-    \ A&#39;, station=&#39;Muzeum&#39;}\ngetLine(Linka A)\nadd tr edges: 50 -&gt;\
-    \ 9\nadd edges: 50 &lt;-&gt; 51\nadd edges: 51 &lt;-&gt; 52\nadd edges: 52 &lt;-&gt;\
-    \ 53\nadd edges: 53 &lt;-&gt; 54\nadd edges: 54 &lt;-&gt; 55\nadd edges: 55 &lt;-&gt;\
-    \ 56\nadd edges: 56 &lt;-&gt; 57\nadd edges: 57 &lt;-&gt; 58\nadd edges: 58 &lt;-&gt;\
-    \ 59\nadd edges: 59 &lt;-&gt; 60\n61 vertices, 122 edges \n0: 1 \n1: 0 2 \n2:\
-    \ 1 3 \n3: 2 4 \n4: 3 5 \n5: 4 6 \n6: 5 7 \n7: 6 8 \n8: 7 28 9 \n9: 8 50 10 \n\
-    10: 9 11 \n11: 10 12 \n12: 11 13 \n13: 12 14 \n14: 13 15 \n15: 14 16 \n16: 15\
-    \ \n17: 18 \n18: 17 19 \n19: 18 20 \n20: 19 21 \n21: 20 22 \n22: 21 23 \n23: 22\
-    \ 24 \n24: 23 25 \n25: 24 26 \n26: 25 48 27 \n27: 26 28 \n28: 27 8 29 \n29: 28\
-    \ 30 \n30: 29 31 \n31: 30 32 \n32: 31 33 \n33: 32 34 \n34: 33 35 \n35: 34 36 \n\
-    36: 35 37 \n37: 36 38 \n38: 37 39 \n39: 38 40 \n40: 39 \n41: 42 \n42: 41 43 \n\
-    43: 42 44 \n44: 43 45 \n45: 44 46 \n46: 45 47 \n47: 46 48 \n48: 47 26 49 \n49:\
-    \ 48 50 \n50: 49 9 51 \n51: 50 52 \n52: 51 53 \n53: 52 54 \n54: 53 55 \n55: 54\
-    \ 56 \n56: 55 57 \n57: 56 58 \n58: 57 59 \n59: 58 60 \n60: 59 \n\ngetLine(Linka\
-    \ C)\ngetLine(Linka B)\nroute: Station{name=&#39;Vysehrad&#39;, transfer=[]}\n\
-    \ -&gt; Station{name=&#39;Namesti Republiky&#39;, transfer=[]}\n\nsearch 52 27"
-  time: Fri, 27 Aug 2021 16:08:11 UTC
+  message: Congratulations!
+  time: Sat, 28 Aug 2021 03:54:05 UTC
 record: -1
