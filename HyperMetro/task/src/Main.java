@@ -87,24 +87,37 @@ public class Main {
                     break;
                 }
                 //route "Linka A" "Petriny" "Linka A" "Flora"
-                case "/route": {
+                case "/route":
+                case "/fastest-route":
+                {
                     String line1 = command.get(1);
                     String station1 = command.get(2);
                     String line2 = command.get(3);
                     String station2 = command.get(4);
-                    List<Station> route = new Route(metro).route(line1, station1, line2, station2);
+                    Route r = new Route(metro);
+                    List<Station> route = r.route(line1, station1, line2, station2);
                     Station prev = null;
+                    int totalTime = r.getLastDistance();
                     for (Station s : route) {
 //                        System.err.println(prev);
 //                        System.err.println(s);
                         MetroLine line = metro.getStationLine(s);
                         TransferStation ts = new TransferStation(line.getName(), s.getName());
 //                        System.err.println(ts);
-                        if (prev != null && prev.getTransfer().contains(ts)) {
-                            System.out.println("Transition to line " + line.getName());
+                        if (prev != null) {
+                            if (prev.getTransfer().contains(ts)) {
+//                                System.out.println("Transition to line " + line.getName());
+                                System.out.println(line.getName());
+//                                totalTime += 5;
+                            } else {
+//                                totalTime += prev.getTime();
+                            }
                         }
                         System.out.println(s.getName());
                         prev = s;
+                    }
+                    if (command.get(0).equals("/fastest-route")) {
+                        System.out.println("Total: " + totalTime + " minutes in the way");
                     }
                     break;
                 }

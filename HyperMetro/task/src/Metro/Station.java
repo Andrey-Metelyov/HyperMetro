@@ -35,7 +35,7 @@ public class Station {
         return transfer;
     }
 
-    public int getTime() { return time; }
+    public int getTime() { return time == null ? 0: time; }
 
     @Override
     public String toString() {

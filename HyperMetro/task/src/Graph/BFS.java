@@ -18,6 +18,10 @@ public class BFS {
         Arrays.fill(distances, Integer.MAX_VALUE);
     }
 
+    public int lastDistance(int end) {
+        return distances[end];
+    }
+
     public List<Integer> search(int start, int end) {
         System.err.println("search " + start + " " + end);
         ArrayDeque<Integer> result = new ArrayDeque<>();
