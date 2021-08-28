@@ -11,29 +11,29 @@ import java.util.*;
 public class Metro {
     List<MetroLine> metroLines = new ArrayList<>();
 
-    public void connect(String line1Name, String station1Name, String line2Name, String station2Name) {
-        MetroLine metroLine1 = getLine(line1Name);
-        MetroLine metroLine2 = getLine(line2Name);
-        Station station1 = metroLine1.getStations().stream()
-                .filter(it -> it.getName().equals(station1Name))
-                .findFirst().orElse(null);
-        station1.getTransfer().add(new TransferStation(line2Name, station2Name));
-        Station station2 = metroLine2.getStations().stream()
-                .filter(it -> it.getName().equals(station2Name))
-                .findFirst().orElse(null);
-        station2.getTransfer().add(new TransferStation(line1Name, station1Name));
-    }
+//    public void connect(String line1Name, String station1Name, String line2Name, String station2Name) {
+//        MetroLine metroLine1 = getLine(line1Name);
+//        MetroLine metroLine2 = getLine(line2Name);
+//        Station station1 = metroLine1.getStations().stream()
+//                .filter(it -> it.getName().equals(station1Name))
+//                .findFirst().orElse(null);
+//        station1.getTransfer().add(new TransferStation(line2Name, station2Name));
+//        Station station2 = metroLine2.getStations().stream()
+//                .filter(it -> it.getName().equals(station2Name))
+//                .findFirst().orElse(null);
+//        station2.getTransfer().add(new TransferStation(line1Name, station1Name));
+//    }
 
-    static class MetroSerializer implements JsonSerializer<Metro> {
-        @Override
-        public JsonElement serialize(Metro src, Type typeOfSrc, JsonSerializationContext context) {
-            JsonObject result = new JsonObject();
-            for(MetroLine metroLine : src.metroLines) {
-                result.add(metroLine.getName(), context.serialize(metroLine));
-            }
-            return result;
-        }
-    }
+//    static class MetroSerializer implements JsonSerializer<Metro> {
+//        @Override
+//        public JsonElement serialize(Metro src, Type typeOfSrc, JsonSerializationContext context) {
+//            JsonObject result = new JsonObject();
+//            for(MetroLine metroLine : src.metroLines) {
+//                result.add(metroLine.getName(), context.serialize(metroLine));
+//            }
+//            return result;
+//        }
+//    }
 
     static class MetroDeserializer implements JsonDeserializer<Metro> {
         @Override
@@ -49,14 +49,14 @@ public class Metro {
         }
     }
 
-    public String serialize() {
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .registerTypeAdapter(Metro.class, new MetroSerializer())
-                .registerTypeAdapter(MetroLine.class, new MetroLine.MetroLineSerializer())
-                .create();
-        return gson.toJson(this);
-    }
+//    public String serialize() {
+//        Gson gson = new GsonBuilder()
+//                .setPrettyPrinting()
+//                .registerTypeAdapter(Metro.class, new MetroSerializer())
+//                .registerTypeAdapter(MetroLine.class, new MetroLine.MetroLineSerializer())
+//                .create();
+//        return gson.toJson(this);
+//    }
 
     public static Metro deserialize(String json) {
         Gson gson = new GsonBuilder()
@@ -68,22 +68,22 @@ public class Metro {
         return metro;
     }
 
-    public MetroLine getLine(String line) {
-        System.err.println("getLine(" + line + ")");
-        return metroLines.stream()
-                .filter(it -> it.getName().equals(line))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public MetroLine getStationLine(Station station) {
-        for (MetroLine metroLine : metroLines) {
-            if (metroLine.getStations().contains(station)) {
-                return metroLine;
-            }
-        }
-        return null;
-    }
+//    public MetroLine getLine(String line) {
+//        System.err.println("getLine(" + line + ")");
+//        return metroLines.stream()
+//                .filter(it -> it.getName().equals(line))
+//                .findFirst()
+//                .orElse(null);
+//    }
+//
+//    public MetroLine getStationLine(Station station) {
+//        for (MetroLine metroLine : metroLines) {
+//            if (metroLine.getStations().contains(station)) {
+//                return metroLine;
+//            }
+//        }
+//        return null;
+//    }
 
     @Override
     public String toString() {
@@ -92,7 +92,8 @@ public class Metro {
                 '}';
     }
 
-/*    public static void main(String[] args) {
+/*
+    public static void main(String[] args) {
         try {
             Metro metro = Metro.deserialize(Files.readString(Paths.get("./HyperMetro/task/test/prague.json")));
             System.out.println(metro);

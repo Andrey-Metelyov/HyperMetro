@@ -1,11 +1,11 @@
 package Graph;
 
-public class WightedEdge {
+public class WeightedEdge {
     private final int from;
     private final int to;
     private final int weight;
 
-    public WightedEdge(int from, int to, int weight) {
+    public WeightedEdge(int from, int to, int weight) {
         this.from = from;
         this.to = to;
         this.weight = weight;

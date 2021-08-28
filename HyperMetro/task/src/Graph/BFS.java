@@ -48,14 +48,14 @@ public class BFS {
             if (d.to() == end) {
                 return end;
             }
-            for (WightedEdge e : G.adj(d.to())) {
+            for (WeightedEdge e : G.adj(d.to())) {
                 relax(e);
             }
         }
         return -1;
     }
 
-    private void relax(WightedEdge e) {
+    private void relax(WeightedEdge e) {
 //        System.err.println("relax(" + e + ')');
         int v = e.from();
         int w = e.to();

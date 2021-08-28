@@ -4,38 +4,10 @@ import java.util.List;
 
 public class Station {
     String name;
+    List<String> prev;
+    List<String> next;
     List<TransferStation> transfer;
     Integer time;
-
-    public void setTime(int time) {
-        this.time = time;
-    }
-
-    public Station(String name) {
-        this.name = name;
-        this.transfer = List.of();
-    }
-
-    public Station(String name, List<TransferStation> transfer) {
-        this.name = name;
-        this.transfer = transfer == null ? List.of() : transfer;
-    }
-
-    public Station(String name, List<TransferStation> transfer, int time) {
-        this.name = name;
-        this.transfer = transfer == null ? List.of() : transfer;
-        this.time = time;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<TransferStation> getTransfer() {
-        return transfer;
-    }
-
-    public int getTime() { return time == null ? 0: time; }
 
     @Override
     public String toString() {
