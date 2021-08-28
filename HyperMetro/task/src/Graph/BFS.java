@@ -63,7 +63,7 @@ public class BFS {
                 queue.add(new Distance(w, distances[w]));
             }
         }
-        System.err.println(Arrays.toString(distances));
+//        System.err.println(Arrays.toString(distances));
 //        System.err.println("queue after relax: " + queue);
     }
 

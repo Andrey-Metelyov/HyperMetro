@@ -12,7 +12,7 @@ public class Main {
         String filename;
         if (args.length == 0) {
             System.out.println("No file specified");
-            filename = "./HyperMetro/task/test/prague.json";
+//            filename = "./HyperMetro/task/test/prague.json";
             return;
         } else {
             filename = args[0];
